@@ -31,6 +31,8 @@ export const theme = {
   },
   focus: {
     ring: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--paper)]",
+    input:
+      "focus:outline-none focus:border-[var(--accent)] focus-visible:outline-none focus-visible:border-[var(--accent)]",
   },
   font: {
     display: "font-[family-name:var(--font-display)]",

@@ -8,8 +8,8 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
       className={cn(
         "h-10 w-full",
         theme.radius.md,
-        "border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)]",
-        theme.focus.ring,
+        "border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)] transition-colors",
+        theme.focus.input,
         className
       )}
       {...rest}
@@ -24,8 +24,8 @@ export function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
       className={cn(
         "min-h-28 w-full",
         theme.radius.md,
-        "border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)]",
-        theme.focus.ring,
+        "border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)] transition-colors",
+        theme.focus.input,
         className
       )}
       {...rest}

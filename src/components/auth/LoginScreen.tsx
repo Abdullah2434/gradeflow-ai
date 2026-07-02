@@ -6,6 +6,7 @@ import { GraduationCap, Loader2 } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Button } from "@/ui/Button";
 import { Input } from "@/ui/Input";
+import { Field } from "@/ui/Field";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
 import { theme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
@@ -72,35 +73,25 @@ export function LoginScreen() {
           <CardContent>
             <form onSubmit={onSubmit} className="space-y-4">
               {mode === "signup" ? (
-                <div>
-                  <label className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">
-                    Full name
-                  </label>
+                <Field label="Full name">
                   <Input
-                    className="mt-1"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Ms. Rivera"
                   />
-                </div>
+                </Field>
               ) : null}
-              <div>
-                <label className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">Email</label>
+              <Field label="Email">
                 <Input
-                  className="mt-1"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="teacher@school.edu"
                   required
                 />
-              </div>
-              <div>
-                <label className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">
-                  Password
-                </label>
+              </Field>
+              <Field label="Password">
                 <Input
-                  className="mt-1"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -108,7 +99,7 @@ export function LoginScreen() {
                   required
                   minLength={6}
                 />
-              </div>
+              </Field>
 
               {error ? <div className="text-sm text-red-700">{error}</div> : null}
 

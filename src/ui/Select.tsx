@@ -179,11 +179,11 @@ export function Select<T extends string = string>({
         className={cn(
           "flex h-10 w-full items-center justify-between gap-2 px-3 text-left text-sm transition-colors",
           theme.radius.md,
-          "border border-[var(--border)] bg-[var(--surface)] text-[var(--ink)]",
+          "border border-[var(--border)] bg-[var(--surface)] text-[var(--ink)] transition-colors",
           "hover:border-[var(--accent)]/40 hover:bg-[var(--surface-subtle)]",
-          theme.focus.ring,
+          theme.focus.input,
           (disabled || isEmpty) && "cursor-not-allowed opacity-60",
-          open && "border-[var(--accent)] ring-2 ring-[var(--accent)]/20",
+          open && "border-[var(--accent)]",
         )}
       >
         <span className={cn("min-w-0 truncate", !selectedOption && "text-[var(--ink-muted)]")}>
@@ -220,8 +220,8 @@ export function Select<T extends string = string>({
                   className={cn(
                     "h-9 w-full pl-8 pr-3 text-sm",
                     theme.radius.sm,
-                    "border border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--ink)] placeholder:text-[var(--ink-muted)]",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/30",
+                    "border border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--ink)] placeholder:text-[var(--ink-muted)] transition-colors",
+                    theme.focus.input,
                   )}
                 />
               </div>

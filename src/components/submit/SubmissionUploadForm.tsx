@@ -7,6 +7,7 @@ import type { FileType } from "@/types/submission.types";
 import { Button } from "@/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
 import { Textarea } from "@/ui/Input";
+import { Field } from "@/ui/Field";
 import { Select } from "@/ui/Select";
 import { FileUpload } from "@/ui/FileUpload";
 import { Badge } from "@/ui/Badge";
@@ -119,25 +120,20 @@ export function SubmissionUploadForm({ assignmentId }: { assignmentId: string })
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-5">
-          <div>
-            <label className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">
-              Student
-            </label>
-            <div className="mt-1">
-              <Select
-                value={studentId}
-                onChange={(value) => {
-                  if (value) setStudentId(value);
-                }}
-                options={[...DEMO_STUDENTS]}
-                placeholder="Select a student…"
-                aria-label="Student"
-              />
-            </div>
-            <p className="mt-1 text-xs text-[var(--ink-muted)]">
+          <Field label="Student">
+            <Select
+              value={studentId}
+              onChange={(value) => {
+                if (value) setStudentId(value);
+              }}
+              options={[...DEMO_STUDENTS]}
+              placeholder="Select a student…"
+              aria-label="Student"
+            />
+            <p className="text-xs text-[var(--ink-muted)]">
               One submission per assignment. Uploading again replaces your previous submission unless it is already approved.
             </p>
-          </div>
+          </Field>
 
           <div className="flex gap-2">
             <Button type="button" variant={mode === "file" ? "accent" : "secondary"} onClick={() => setMode("file")}>

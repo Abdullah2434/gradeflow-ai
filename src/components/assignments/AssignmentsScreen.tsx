@@ -12,6 +12,7 @@ import { RubricBuilder } from "@/components/assignments/RubricBuilder";
 import { Button } from "@/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
 import { Input } from "@/ui/Input";
+import { Field } from "@/ui/Field";
 import { Select } from "@/ui/Select";
 import { Badge } from "@/ui/Badge";
 import { AssignmentsSkeleton } from "@/skeletons/AssignmentsSkeleton";
@@ -97,15 +98,13 @@ export function AssignmentsScreen() {
             Build rubrics once, reuse them, and track every submission through the grading pipeline.
           </p>
         </div>
-        <div className="w-full max-w-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">Class ID</div>
+        <Field label="Class ID" className="w-full max-w-sm">
           <Input
-            className="mt-1"
             value={classId}
             onChange={(e) => setClassId(e.target.value)}
             placeholder="Paste class UUID"
           />
-        </div>
+        </Field>
       </div>
 
       <Card>
@@ -113,42 +112,33 @@ export function AssignmentsScreen() {
           <CardTitle>Create assignment</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            <div className="md:col-span-2">
-              <div className="text-xs font-medium text-zinc-700">Title</div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <Field label="Title" className="md:col-span-2">
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Essay 1: Industrial Revolution"
               />
-            </div>
-            <div>
-              <div className="text-xs font-medium text-zinc-700">Due date</div>
+            </Field>
+            <Field label="Due date">
               <Input
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
               />
-            </div>
-            <div className="md:col-span-3">
-              <div className="text-xs font-medium text-zinc-700">
-                Description
-              </div>
+            </Field>
+            <Field label="Description" className="md:col-span-3">
               <Input
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Optional student instructions"
               />
-            </div>
+            </Field>
           </div>
 
-          <div className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 md:flex-row md:items-end md:justify-between">
-            <div className="flex-1">
-              <div className="text-xs font-medium text-zinc-700">
-                Create from existing assignment
-              </div>
-              <div className="mt-1">
-                <Select
+          <div className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 md:flex-row md:items-end md:justify-between">
+            <Field label="Create from existing assignment" className="flex-1">
+              <Select
                   value={copyFrom}
                   onChange={setCopyFrom}
                   placeholder="Select an assignment…"
@@ -159,9 +149,8 @@ export function AssignmentsScreen() {
                     description: `${o.rubric.length} rubric criteria`,
                   }))}
                   aria-label="Create from existing assignment"
-                />
-              </div>
-            </div>
+              />
+            </Field>
             <Button
               variant="secondary"
               onClick={applyCopy}
