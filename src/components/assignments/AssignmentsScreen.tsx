@@ -17,6 +17,7 @@ import { Select } from "@/ui/Select";
 import { Badge } from "@/ui/Badge";
 import { AssignmentsSkeleton } from "@/skeletons/AssignmentsSkeleton";
 import { theme } from "@/lib/theme";
+import { cn } from "@/lib/utils";
 
 function normalizeRubric(rubric: RubricCriterion[]): RubricCriterion[] {
   return rubric.map((r) => ({
@@ -92,7 +93,7 @@ export function AssignmentsScreen() {
     <div className="space-y-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div className={theme.animation.fadeUp}>
-          <div className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Dashboard</div>
+          <div className={theme.component.pageEyebrow}>Dashboard</div>
           <h1 className="display-title mt-2 text-4xl font-semibold text-[var(--ink)]">Assignments</h1>
           <p className="mt-2 max-w-xl text-sm text-[var(--ink-muted)]">
             Build rubrics once, reuse them, and track every submission through the grading pipeline.
@@ -136,7 +137,7 @@ export function AssignmentsScreen() {
             </Field>
           </div>
 
-          <div className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 md:flex-row md:items-end md:justify-between">
+          <div className={cn(theme.component.insetPanel, "flex flex-col gap-4 md:flex-row md:items-end md:justify-between")}>
             <Field label="Create from existing assignment" className="flex-1">
               <Select
                   value={copyFrom}
@@ -163,7 +164,7 @@ export function AssignmentsScreen() {
 
           <RubricBuilder value={rubric} onChange={setRubric} />
 
-          {createError ? <div className="text-sm text-red-700">{createError}</div> : null}
+          {createError ? <div className={theme.component.alertDanger}>{createError}</div> : null}
 
           <div className="flex justify-end">
             <Button variant="accent" onClick={onCreate}
@@ -187,27 +188,24 @@ export function AssignmentsScreen() {
         </CardHeader>
         <CardContent>
           {!shouldFetch ? (
-            <div className="text-sm text-zinc-600 my-2">
+            <div className="my-2 text-sm text-[var(--ink-muted)]">
               Enter a Class ID to load assignments.
             </div>
           ) : isFetching ? (
             <AssignmentsSkeleton />
           ) : isError ? (
-            <div className="text-sm text-red-600">
+            <div className={theme.component.alertDanger}>
               {getRtkErrorMessage(error) ?? "Failed to load assignments"}
             </div>
           ) : (data?.length ?? 0) === 0 ? (
-            <div className="text-sm text-zinc-600">No assignments yet.</div>
+            <div className="text-sm text-[var(--ink-muted)]">No assignments yet.</div>
           ) : (
             <div className="space-y-2">
               {data!.map((a) => (
-                <div
-                  key={a.id}
-                  className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-4 md:flex-row md:items-center md:justify-between"
-                >
+                <div key={a.id} className={theme.component.listRow}>
                   <div>
                     <div className="flex items-center gap-2">
-                      <div className="text-sm font-semibold text-zinc-950">
+                      <div className="text-sm font-semibold text-[var(--ink)]">
                         {a.title}
                       </div>
                       <Badge variant="neutral">
@@ -218,15 +216,12 @@ export function AssignmentsScreen() {
                       ) : null}
                     </div>
                     {a.description ? (
-                      <div className="mt-1 text-sm text-zinc-600">
+                      <div className="mt-1 text-sm text-[var(--ink-muted)]">
                         {a.description}
                       </div>
                     ) : null}
                   </div>
-                  <Link
-                    href={`/assignments/${a.id}`}
-                    className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950"
-                  >
+                  <Link href={`/assignments/${a.id}`} className={theme.component.rowAction}>
                     View
                     <ArrowRight className="h-4 w-4" />
                   </Link>

@@ -13,7 +13,7 @@ export function ApproveBar({
   totalScore: number;
 }) {
   return (
-    <div className="sticky bottom-6 flex flex-col gap-4 rounded-2xl border border-[var(--accent)]/20 bg-[var(--surface)] p-5 shadow-lg md:flex-row md:items-center md:justify-between">
+    <div className="sticky bottom-6 flex flex-col gap-4 rounded-2xl border border-[var(--accent)]/15 bg-[var(--surface)] p-5 shadow-[0_8px_32px_-8px_rgba(26,33,30,0.15)] backdrop-blur-sm md:flex-row md:items-center md:justify-between">
       <div>
         <div className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">Final score</div>
         <div className="display-title text-3xl font-semibold text-[var(--accent)]">{totalScore}</div>

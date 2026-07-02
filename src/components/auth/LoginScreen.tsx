@@ -59,7 +59,7 @@ export function LoginScreen() {
     <div className="paper-texture grid-overlay flex min-h-dvh items-center justify-center p-6">
       <div className={cn("w-full max-w-md", theme.animation.fadeUp)}>
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)] text-white shadow-lg">
+          <div className={cn(theme.component.brandMark, "mx-auto mb-5 h-14 w-14")}>
             <GraduationCap className="h-7 w-7" />
           </div>
           <h1 className="display-title text-4xl font-semibold text-[var(--ink)]">GradeFlow AI</h1>
@@ -101,7 +101,7 @@ export function LoginScreen() {
                 />
               </Field>
 
-              {error ? <div className="text-sm text-red-700">{error}</div> : null}
+              {error ? <div className={theme.component.alertDanger}>{error}</div> : null}
 
               <Button type="submit" variant="accent" className="w-full" disabled={loading}>
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
@@ -111,16 +111,16 @@ export function LoginScreen() {
 
             <button
               type="button"
-              className="mt-4 w-full text-center text-sm text-[var(--accent)] hover:underline"
+              className="mt-4 w-full text-center text-sm font-medium text-[var(--accent)] transition hover:underline"
               onClick={() => setMode(mode === "login" ? "signup" : "login")}
             >
               {mode === "login" ? "Need an account? Sign up" : "Already have an account? Sign in"}
             </button>
 
-            <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] p-4 text-xs text-[var(--ink-muted)]">
-              <div className="font-semibold uppercase tracking-wide text-[var(--ink)]">Demo account</div>
-              <div className="mt-2 font-mono">teacher@test.com</div>
-              <div className="font-mono">password123</div>
+            <div className={cn(theme.component.insetPanel, "mt-6 text-xs text-[var(--ink-muted)]")}>
+              <div className="font-semibold text-[var(--ink-soft)]">Demo account</div>
+              <div className="mt-2 font-mono text-[var(--ink)]">teacher@test.com</div>
+              <div className="font-mono text-[var(--ink)]">password123</div>
             </div>
           </CardContent>
         </Card>

@@ -5,10 +5,10 @@ type Variant = "neutral" | "warning" | "success" | "danger" | "accent";
 
 const variantClass: Record<Variant, string> = {
   neutral: "bg-[var(--surface-subtle)] text-[var(--ink-muted)] border border-[var(--border)]",
-  warning: "bg-amber-50 text-amber-900 border border-amber-200",
-  success: "bg-emerald-50 text-emerald-900 border border-emerald-200",
-  danger: "bg-red-50 text-red-900 border border-red-200",
-  accent: "bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20",
+  warning: "bg-[var(--warning-soft)] text-[var(--warning-text)] border border-[var(--warning-border)]",
+  success: "bg-[var(--success-soft)] text-[var(--success)] border border-[var(--success-border)]",
+  danger: "bg-[var(--danger-soft)] text-[var(--danger)] border border-[var(--danger-border)]",
+  accent: "bg-[var(--accent-soft)] text-[var(--accent)] border border-[var(--accent)]/20",
 };
 
 const statusVariant: Record<SubmissionStatus, Variant> = {
@@ -27,7 +27,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide uppercase",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-[0.6875rem] font-semibold tracking-wide uppercase",
         variantClass[variant],
         className
       )}

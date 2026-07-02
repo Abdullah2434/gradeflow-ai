@@ -10,6 +10,7 @@ import { WeakCriteriaChart } from "@/components/insights/WeakCriteriaChart";
 import { InsightsSkeleton } from "@/skeletons/InsightsSkeleton";
 import { Button } from "@/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
+import { theme } from "@/lib/theme";
 
 export function InsightsScreen({ assignmentId }: { assignmentId: string }) {
   const { data, isFetching, isError, refetch } = useGetClassInsightsQuery({ assignmentId });
@@ -26,7 +27,7 @@ export function InsightsScreen({ assignmentId }: { assignmentId: string }) {
     <div className="space-y-6">
       <Link
         href={`/assignments/${assignmentId}`}
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-[var(--ink-muted)] hover:bg-[var(--surface-subtle)]"
+        className={theme.component.rowAction}
       >
         <ArrowLeft className="h-4 w-4" />
         Back to assignment
@@ -46,7 +47,7 @@ export function InsightsScreen({ assignmentId }: { assignmentId: string }) {
       </div>
 
       {isError ? (
-        <div className="text-sm text-red-700">Failed to load insights for this assignment.</div>
+        <div className={theme.component.alertDanger}>Failed to load insights for this assignment.</div>
       ) : null}
 
       {!data ? (

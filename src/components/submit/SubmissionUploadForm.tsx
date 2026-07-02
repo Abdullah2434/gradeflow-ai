@@ -11,6 +11,7 @@ import { Field } from "@/ui/Field";
 import { Select } from "@/ui/Select";
 import { FileUpload } from "@/ui/FileUpload";
 import { Badge } from "@/ui/Badge";
+import { theme } from "@/lib/theme";
 
 const DEMO_STUDENTS = [
   {
@@ -156,9 +157,9 @@ export function SubmissionUploadForm({ assignmentId }: { assignmentId: string })
           )}
 
           {file ? <div className="text-sm text-[var(--ink-muted)]">Selected: {file.name}</div> : null}
-          {error ? <div className="text-sm text-red-700">{error}</div> : null}
+          {error ? <div className={theme.component.alertDanger}>{error}</div> : null}
           {result ? (
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+            <div className={theme.component.alertSuccess}>
               Submitted! Status: <strong>{result.status}</strong>
             </div>
           ) : null}

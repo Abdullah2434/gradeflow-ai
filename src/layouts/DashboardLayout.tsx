@@ -8,7 +8,6 @@ import {
   Lightbulb,
   LogOut,
   PenSquare,
-  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { theme } from "@/lib/theme";
@@ -33,20 +32,36 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-dvh overflow-hidden paper-texture">
       <div className="flex h-full">
-        <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-[var(--border)] bg-[var(--sidebar)] lg:flex">
-          <div className="border-b border-white/10 px-6 py-6">
+        <aside
+          className={cn(
+            "sticky top-0 hidden h-dvh shrink-0 flex-col lg:flex",
+            theme.layout.sidebarWidthClass,
+            "border-r border-[var(--sidebar-border)]",
+            "bg-[var(--sidebar)]"
+          )}
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-elevated) 100%)",
+          }}
+        >
+          <div className="border-b border-[var(--sidebar-border)] px-5 py-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent)] text-white">
+              <div className={cn(theme.component.brandMark, "h-10 w-10")}>
                 <GraduationCap className="h-5 w-5" />
               </div>
               <div>
-                <div className="display-title text-lg font-semibold text-[var(--sidebar-fg)]">GradeFlow AI</div>
-                <div className="text-xs text-[var(--sidebar-muted)]">Grading pipeline</div>
+                <div className="display-title text-lg font-semibold text-[var(--sidebar-fg)]">
+                  GradeFlow AI
+                </div>
+                <div className="text-xs text-[var(--sidebar-fg)]/80">Grading pipeline</div>
               </div>
             </div>
           </div>
 
-          <nav className="flex flex-1 flex-col gap-1 p-4">
+          <nav className="flex flex-1 flex-col gap-1 p-3">
+            <div className="mb-2 px-3 text-[0.625rem] font-semibold uppercase tracking-widest text-[var(--sidebar-fg)]/75">
+              Workspace
+            </div>
             {nav.map((item) => {
               const Icon = item.icon;
               const active =
@@ -58,40 +73,40 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition",
+                    "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150",
                     active
-                      ? "bg-white/10 text-[var(--sidebar-fg)]"
-                      : "text-[var(--sidebar-muted)] hover:bg-white/5 hover:text-[var(--sidebar-fg)]"
+                      ? "bg-[var(--sidebar-active)] text-[var(--sidebar-fg)] shadow-[inset_0_0_0_1px_var(--sidebar-active-border)]"
+                      : "text-[var(--sidebar-fg)] hover:bg-[var(--sidebar-hover)]"
                   )}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4 w-4 text-[var(--sidebar-fg)]" />
                   {item.label}
                 </Link>
               );
             })}
           </nav>
 
-          <div className="border-t border-white/10 p-4">
+          <div className="border-t border-[var(--sidebar-border)] p-3">
             <Link
               href="/"
-              className="mb-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--sidebar-muted)] hover:bg-white/5 hover:text-[var(--sidebar-fg)]"
+              className="mb-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--sidebar-fg)] transition hover:bg-[var(--sidebar-hover)]"
             >
-              <BookOpenCheck className="h-4 w-4" />
+              <BookOpenCheck className="h-4 w-4 text-[var(--sidebar-fg)]" />
               Home
             </Link>
             <button
               type="button"
               onClick={signOut}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--sidebar-muted)] hover:bg-white/5 hover:text-[var(--sidebar-fg)]"
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--sidebar-fg)] transition hover:bg-[var(--sidebar-hover)]"
             >
-              <LogOut className="h-4 w-4" />
+              <LogOut className="h-4 w-4 text-[var(--sidebar-fg)]" />
               Sign out
             </button>
           </div>
         </aside>
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto">
-          <header className="border-b border-[var(--border)] bg-[var(--surface)]/80 backdrop-blur lg:hidden">
+          <header className="border-b border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur-md lg:hidden">
             <div
               className={cn(
                 "flex h-14 items-center justify-between",
@@ -99,8 +114,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 theme.layout.pageXPaddingClass
               )}
             >
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-[var(--accent)]" />
+              <div className="flex items-center gap-2.5">
+                <div className={cn(theme.component.brandMark, "h-8 w-8")}>
+                  <GraduationCap className="h-4 w-4" />
+                </div>
                 <span className="display-title text-lg font-semibold">GradeFlow AI</span>
               </div>
             </div>
@@ -108,7 +125,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
           <main
             className={cn(
-              "mx-auto w-full flex-1 py-8",
+              "mx-auto w-full flex-1 py-8 lg:py-10",
               theme.layout.maxWidthClass,
               theme.layout.pageXPaddingClass,
               theme.animation.fadeUp

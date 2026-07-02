@@ -12,11 +12,11 @@ export function Field({
   htmlFor?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex flex-col gap-1.5", className)}>
       {label ? (
         <label
           htmlFor={htmlFor}
-          className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]"
+          className="text-xs font-semibold tracking-wide text-[var(--ink-soft)]"
         >
           {label}
         </label>

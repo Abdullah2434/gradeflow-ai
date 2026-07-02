@@ -4,6 +4,7 @@ import { GripVertical, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui/Button";
 import { Input } from "@/ui/Input";
+import { theme } from "@/lib/theme";
 import type { RubricCriterion } from "@/types/assignment.types";
 
 export function RubricBuilder({
@@ -37,7 +38,7 @@ export function RubricBuilder({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <div className="text-sm font-semibold text-zinc-950">Rubric</div>
+        <div className="text-sm font-semibold text-[var(--ink)]">Rubric</div>
         <Button variant="secondary" size="sm" onClick={addRow}>
           <Plus className="h-4 w-4" />
           Add criterion
@@ -46,8 +47,14 @@ export function RubricBuilder({
 
       <div className="space-y-2">
         {value.map((row, idx) => (
-          <div key={idx} className={cn("flex items-center gap-2 rounded-xl border border-zinc-200 bg-white p-3")}>
-            <GripVertical className="h-4 w-4 text-zinc-400" />
+          <div
+            key={idx}
+            className={cn(
+              "flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] p-3",
+              theme.radius.md
+            )}
+          >
+            <GripVertical className="h-4 w-4 text-[var(--ink-muted)]" />
 
             <div className="flex-1">
               <Input
@@ -80,14 +87,19 @@ export function RubricBuilder({
                 <ArrowDown className="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="sm" onClick={() => removeRow(idx)} aria-label="Remove">
-                <Trash2 className="h-4 w-4 text-red-600" />
+                <Trash2 className="h-4 w-4 text-[var(--danger)]" />
               </Button>
             </div>
           </div>
         ))}
 
         {value.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-zinc-200 bg-white p-6 text-sm text-zinc-600">
+          <div
+            className={cn(
+              "border border-dashed border-[var(--border)] bg-[var(--surface-subtle)] p-6 text-sm text-[var(--ink-muted)]",
+              theme.radius.md
+            )}
+          >
             Add at least one criterion to grade against.
           </div>
         ) : null}
@@ -95,4 +107,3 @@ export function RubricBuilder({
     </div>
   );
 }
-

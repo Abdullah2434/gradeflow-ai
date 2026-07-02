@@ -56,6 +56,8 @@ async function extractFromImage(fileUrl: string): Promise<string> {
 }
 
 async function extractFromPdf(fileUrl: string): Promise<string> {
+  const { ensurePdfNodePolyfills } = await import("@/lib/pdf-node-polyfills");
+  await ensurePdfNodePolyfills();
   const { PDFParse } = await import("pdf-parse");
   const buffer = await fetchFileBuffer(fileUrl);
   const parser = new PDFParse({ data: buffer });

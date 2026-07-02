@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useGetSubmissionsByAssignmentQuery } from "@/store/services/submissions/submissionsApi";
 import { StatusBadge } from "@/ui/Badge";
 import { SubmissionsListSkeleton } from "@/skeletons/SubmissionsListSkeleton";
+import { theme } from "@/lib/theme";
 import type { SubmissionStatus } from "@/types/submission.types";
 
 function studentLabel(students: { name?: string | null; full_name?: string | null } | null | undefined) {
@@ -15,7 +16,7 @@ export function AssignmentSubmissionsList({ assignmentId }: { assignmentId: stri
   const { data, isFetching, isError } = useGetSubmissionsByAssignmentQuery({ assignmentId });
 
   if (isFetching) return <SubmissionsListSkeleton />;
-  if (isError) return <div className="text-sm text-red-700">Failed to load submissions.</div>;
+  if (isError) return <div className={theme.component.alertDanger}>Failed to load submissions.</div>;
   if (!data?.length) {
     return (
       <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface-subtle)] p-8 text-center text-sm text-[var(--ink-muted)]">
@@ -30,10 +31,7 @@ export function AssignmentSubmissionsList({ assignmentId }: { assignmentId: stri
         const reviewable: SubmissionStatus[] = ["pending_teacher_review", "flagged_low_confidence"];
         const canReview = reviewable.includes(s.status);
         return (
-          <div
-            key={s.id}
-            className="flex flex-col gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 md:flex-row md:items-center md:justify-between"
-          >
+          <div key={s.id} className={theme.component.listRow}>
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <div className="font-semibold text-[var(--ink)]">{studentLabel(s.students)}</div>
@@ -44,10 +42,7 @@ export function AssignmentSubmissionsList({ assignmentId }: { assignmentId: stri
               </div>
             </div>
             {canReview ? (
-              <Link
-                href={`/review/${s.id}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-hover)]"
-              >
+              <Link href={`/review/${s.id}`} className={theme.component.rowActionAccent}>
                 Review
                 <ArrowRight className="h-4 w-4" />
               </Link>

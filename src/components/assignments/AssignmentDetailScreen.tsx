@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
 import { Badge } from "@/ui/Badge";
 import { Button } from "@/ui/Button";
 import { AssignmentsSkeleton } from "@/skeletons/AssignmentsSkeleton";
+import { theme } from "@/lib/theme";
 
 export function AssignmentDetailScreen({ id }: { id: string }) {
   const { data, isFetching, isError } = useGetAssignmentByIdQuery({ id });
@@ -16,7 +17,7 @@ export function AssignmentDetailScreen({ id }: { id: string }) {
     <div className="space-y-6">
       <Link
         href="/assignments"
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-[var(--ink-muted)] hover:bg-[var(--surface-subtle)] hover:text-[var(--ink)]"
+        className={theme.component.rowAction}
       >
         <ArrowLeft className="h-4 w-4" />
         Back to assignments
@@ -25,7 +26,7 @@ export function AssignmentDetailScreen({ id }: { id: string }) {
       {isFetching ? (
         <AssignmentsSkeleton />
       ) : isError || !data ? (
-        <div className="text-sm text-red-700">Failed to load assignment.</div>
+        <div className={theme.component.alertDanger}>Failed to load assignment.</div>
       ) : (
         <>
           <Card>
