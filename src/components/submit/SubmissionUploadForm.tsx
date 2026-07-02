@@ -35,6 +35,7 @@ function detectFileType(file: File): FileType {
 }
 
 function getSubmitError(err: unknown) {
+  if (err instanceof Error) return err.message;
   if (!err || typeof err !== "object") return "Submission failed";
   const maybeData = (err as { data?: unknown }).data;
   if (!maybeData || typeof maybeData !== "object") return "Submission failed";
