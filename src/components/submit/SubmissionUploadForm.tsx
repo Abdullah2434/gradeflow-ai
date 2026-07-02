@@ -6,11 +6,23 @@ import { useSubmitAssignmentMutation } from "@/store/services/submissions/submis
 import type { FileType } from "@/types/submission.types";
 import { Button } from "@/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
-import { Input, Textarea } from "@/ui/Input";
+import { Textarea } from "@/ui/Input";
+import { Select } from "@/ui/Select";
 import { FileUpload } from "@/ui/FileUpload";
 import { Badge } from "@/ui/Badge";
 
-const DEMO_STUDENT_ID = "00000000-0000-0000-0000-000000000002";
+const DEMO_STUDENTS = [
+  {
+    label: "Alex Morgan",
+    value: "00000000-0000-0000-0000-000000000002",
+    description: "Demo student · Class 1",
+  },
+  {
+    label: "Jordan Lee",
+    value: "00000000-0000-0000-0000-000000000003",
+    description: "Demo student · Class 1",
+  },
+] as const;
 
 function detectFileType(file: File): FileType {
   const name = file.name.toLowerCase();
@@ -30,7 +42,7 @@ function getSubmitError(err: unknown) {
 }
 
 export function SubmissionUploadForm({ assignmentId }: { assignmentId: string }) {
-  const [studentId, setStudentId] = useState(DEMO_STUDENT_ID);
+  const [studentId, setStudentId] = useState<string>(DEMO_STUDENTS[0].value);
   const [mode, setMode] = useState<"file" | "text">("file");
   const [file, setFile] = useState<File | null>(null);
   const [pastedText, setPastedText] = useState("");
@@ -93,6 +105,7 @@ export function SubmissionUploadForm({ assignmentId }: { assignmentId: string })
       setResult(res);
     } catch (err) {
       setError(getSubmitError(err));
+        console.error(err);
     }
   }
 
@@ -108,9 +121,19 @@ export function SubmissionUploadForm({ assignmentId }: { assignmentId: string })
         <form onSubmit={onSubmit} className="space-y-5">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-muted)]">
-              Student ID
+              Student
             </label>
-            <Input className="mt-1" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+            <div className="mt-1">
+              <Select
+                value={studentId}
+                onChange={(value) => {
+                  if (value) setStudentId(value);
+                }}
+                options={[...DEMO_STUDENTS]}
+                placeholder="Select a student…"
+                aria-label="Student"
+              />
+            </div>
             <p className="mt-1 text-xs text-[var(--ink-muted)]">
               One submission per assignment. Uploading again replaces your previous submission unless it is already approved.
             </p>

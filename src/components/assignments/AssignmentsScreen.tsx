@@ -12,6 +12,7 @@ import { RubricBuilder } from "@/components/assignments/RubricBuilder";
 import { Button } from "@/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/Card";
 import { Input } from "@/ui/Input";
+import { Select } from "@/ui/Select";
 import { Badge } from "@/ui/Badge";
 import { AssignmentsSkeleton } from "@/skeletons/AssignmentsSkeleton";
 import { theme } from "@/lib/theme";
@@ -146,23 +147,20 @@ export function AssignmentsScreen() {
               <div className="text-xs font-medium text-zinc-700">
                 Create from existing assignment
               </div>
-              <select
-                className="mt-1 h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm text-zinc-950"
-                value={copyFrom}
-                onChange={(e) => setCopyFrom(e.target.value)}
-                disabled={!copyOptions.length}
-              >
-                <option value="">
-                  {copyOptions.length
-                    ? "Select an assignment…"
-                    : "No assignments yet"}
-                </option>
-                {copyOptions.map((o) => (
-                  <option key={o.id} value={o.id}>
-                    {o.title}
-                  </option>
-                ))}
-              </select>
+              <div className="mt-1">
+                <Select
+                  value={copyFrom}
+                  onChange={setCopyFrom}
+                  placeholder="Select an assignment…"
+                  emptyMessage="No assignments yet"
+                  options={copyOptions.map((o) => ({
+                    label: o.title,
+                    value: o.id,
+                    description: `${o.rubric.length} rubric criteria`,
+                  }))}
+                  aria-label="Create from existing assignment"
+                />
+              </div>
             </div>
             <Button
               variant="secondary"
